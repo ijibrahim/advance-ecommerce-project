@@ -1,0 +1,3 @@
+http://127.0.0.1:8000/admin/login	admin@gmail.com		ibrahim1
+http://127.0.0.1:8000/login		ibrahim@mail.com	12345678
+http://127.0.0.1:8000/login		user@gmail.com		12345678
