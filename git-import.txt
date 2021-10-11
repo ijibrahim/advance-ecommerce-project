@@ -1,2 +1,14 @@
+
+===============File Upload process ===============
+
 git init
 git add .
+git commit -m "Multi Auth with theme" .
+git remote add origin https://github.com/ijibrahim/advance-ecommerce-project.git
+git push-u origin master
+
+=========From Local Host site Work ===============
+git status
+git add .
+git commit -m "modify" .
+git push -u origin master
