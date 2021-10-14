@@ -34,7 +34,7 @@
 						<tbody>
 							@foreach($category as $item)
 							<tr>
-								<td><span><i class="{{ $item->category_icon }} text-danger fa-10x"></i></span></td>
+								<td><span><i class="fas fa {{ $item->category_icon }} text-secondary fa-2x"></i></span></td>
 								<td>{{ $item->category_name_en }}</td>
 								<td>{{ $item->category_name_bn }}</td>
 								<td>
