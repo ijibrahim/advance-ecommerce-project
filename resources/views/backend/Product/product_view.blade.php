@@ -46,13 +46,13 @@
 
                                 <td>
                                     @if($item->discount_price == Null)
-                                        <span class="">No Discount</span>
+                                        <span class="text-danger">No Discount</span>
                                     @else
                                         @php 
-                                           $amount = ($item->selling_price - $item->discount_price);
-                                           $discount = ($amount/$item->selling_price) * 100
+                                           $amount = $item->discount_price / $item->selling_price;
+                    						$percent = $amount * 100;
                                         @endphp
-                                            <span>{{ round($discount) }} %</span>
+                                            <span>{{ round($percent) }} %</span>
                                     @endif
                                 </td>
                                 <td>
@@ -100,7 +100,6 @@
 		<!-- /.content -->
 	  
 	  </div>
-
 
 
 

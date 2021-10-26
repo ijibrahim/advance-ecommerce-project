@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BrandController;
@@ -8,8 +10,9 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
+
 use App\Http\Controllers\Frontend\IndexController;
-use App\Models\User;
+use App\Http\Controllers\Frontend\LanguageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,18 +32,17 @@ use App\Models\User;
 
 Route::group(['prefix'=> 'admin', 'middleware'=>['admin:admin']], function(){
     Route::get('/login', [AdminController::class, 'loginForm']);
-    Route::post('login', [AdminController::class, 'store'])->name('admin.login');
+    Route::post('/login', [AdminController::class, 'store'])->name('admin.login');
 });
 
 
 
 
-
+Route::middleware(['auth:admin'])->group(function(){
 
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
     return view('admin.index');
-})->name('dashboard');
-
+})->name('dashboard')->middleware('auth:admin');
 
 
 // Admin All Route
@@ -52,7 +54,7 @@ Route::get('/admin/change/password', [AdminProfileController::class, 'AdminChang
 Route::post('/update/change/password', [AdminProfileController::class, 'AdminUpDateChangePassword'])->name('update.change.password');
 
 
-
+}); // End Middleware admin
 
 // User All Routes
 
@@ -89,7 +91,7 @@ Route::prefix('category')->group(function(){
     Route::get('/view', [CategoryController::class, 'CategoryView'])->name('all.category');
     Route::post('/store', [CategoryController::class, 'CategoryStore'])->name('category.store');
     Route::get('/edit/{id}', [CategoryController::class, 'CategoryEdit'])->name('category.edit');
-    Route::post('/update', [CategoryController::class, 'CategoryUpdate'])->name('category.update');
+    Route::post('/update/{id}', [CategoryController::class, 'CategoryUpdate'])->name('category.update');
     Route::get('/delete/{id}', [CategoryController::class, 'CategoryDelete'])->name('category.delete');
 
 
@@ -140,6 +142,36 @@ Route::prefix('slider')->group(function(){
     Route::post('/store', [SliderController::class, 'SliderStore'])->name('slider.store');
     Route::get('/edit/{id}', [SliderController::class, 'SliderEdit'])->name('slider.edit');
     Route::post('/update', [SliderController::class, 'SliderUpdate'])->name('slider.update');
-    Route::get('/delete/{id}', [BrandController::class, 'BrandDelete'])->name('brand.delete');
+    Route::get('/delete/{id}', [SliderController::class, 'SliderDelete'])->name('slider.delete');
+    Route::get('/inactive/{id}', [SliderController::class, 'SliderInactive'])->name('slider.inactive');
+    Route::get('/active/{id}', [SliderController::class, 'SliderActive'])->name('slider.active');
 
 });
+
+
+/// Front End All Routes /////
+
+// MultiLanguage All Route ///
+
+
+    Route::get('/language/bangla', [LanguageController::class, 'Bangla'])->name('bangla.language');
+    Route::get('/language/english', [LanguageController::class, 'English'])->name('english.language');
+
+
+    // Front End Product Details Page URL
+    Route::get('/product/details/{id}/{slug}', [IndexController::class, 'ProductDetails']);
+
+    // Front end Tags  Pags
+    Route::get('/product/tag/{tag}', [IndexController::class, 'TagWiseProduct']);
+
+
+
+
+
+
+
+
+
+
+
+
