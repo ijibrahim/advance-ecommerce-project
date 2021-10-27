@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\SliderController;
 
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
+use App\Http\Controllers\Frontend\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -163,6 +164,18 @@ Route::prefix('slider')->group(function(){
 
     // Front end Tags  Pags
     Route::get('/product/tag/{tag}', [IndexController::class, 'TagWiseProduct']);
+
+    // Front end sub category wise data
+    Route::get('/subcategory/product/{subcat_id}/{slug}', [IndexController::class, 'SubCatWiseProduct']);
+
+    // Front end Sub sub category wise data
+    Route::get('/subsubcategory/product/{subsubcat_id}/{slug}', [IndexController::class, 'SubSubCatWiseProduct']);
+
+    // Product View Modal with Ajax
+    Route::get('/product/view/modal/{id}', [IndexController::class, 'ProductViewAjax']);
+
+    // Add to Cart Store Data
+    Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
 
 
 

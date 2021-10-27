@@ -3,7 +3,7 @@
 @section('content')
 
 @section('title')
-    Tags Wise Product
+   Sub Sub Category Product
 @endsection
 
 

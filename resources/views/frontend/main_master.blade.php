@@ -5,6 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="description" content="">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <meta name="author" content="">
 <meta name="keywords" content="MediaCenter, Template, eCommerce">
 <meta name="robots" content="all">
@@ -83,6 +84,217 @@
         }
         @endif
     </script>
+
+
+
+    <!-- Add to Card Modal -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"> <strong><span id="pname"></span></strong> </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        
+
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                  <img src="" class="card-img-top" alt="" height="200" width="180" id="pimage">
+                  
+                </div>
+            </div> <!-- End col-md-4 -->
+
+            <div class="col-md-4">
+               <ul class="list-group">
+                  <li class="list-group-item">Product Price: <strong class="text-danger">$<span id="pprice"></span></strong> <del id="oldprice"></del> </li>
+                  <li class="list-group-item">Product Code: <strong id="pcode"></strong>  </li>
+                  <li class="list-group-item">Category: <strong id="pctegory"></strong>  </li>
+                  <li class="list-group-item">Brand: <strong id="pbrand"></strong>  </li>
+                  <li class="list-group-item">Stock: <span class="badge badge-fill badge-success" id="availabe" style="background: green;"></span> <span class="badge badge-fill badge-danger" id="stockout" style="background: red;"></span> </li>
+                </ul> 
+            </div> <!-- End col-md-4 -->
+
+            <div class="col-md-4">
+                <div class="form-group" id="ColorArea">
+                    <label for="color">Choose Color</label>
+                    <select class="form-control" id="color" name="color">
+                      
+                    </select>
+                </div>
+
+                <div class="form-group" id="SizeArea">
+                    <label for="size">Choose Size</label>
+                    <select class="form-control" id="size" name="size">
+                      
+                    </select>
+                </div> 
+
+                <div class="form-group">
+                    <label for="qty">Quantity</label>
+                    <input type="number" class="form-control" id="qty" value="1" min="1">
+                </div>
+
+                <input type="hidden" id="product_id">
+                <button type="submit" class="btn btn-primary mb-2" onclick="addToCart()">Add to Card</button>
+                
+            </div> <!-- End col-md-4 -->
+
+        </div> 
+    <!-- End Row -->
+
+
+
+
+
+      </div> 
+    <!-- end Modal body -->
+
+      
+    </div>
+  </div>
+</div>
+
+    <!-- End Add to Card Modal -->
+
+
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers:{
+            'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+
+    // Start Product View Model
+
+    function productView(id){
+       // alert(id)
+
+       $.ajax({
+            type: 'GET',
+            url: '/product/view/modal/'+id,
+            dataType: 'json',
+            success: function(data){
+               // console.log(data)
+
+               $('#pname').text(data.product.product_name_en);
+               $('#price').text(data.product.selling_price);
+               $('#pcode').text(data.product.product_code);
+               $('#pctegory').text(data.product.category.category_name_en);
+               $('#pbrand').text(data.product.brand.brand_name_en);
+               $('#pstock').text(data.product.product_qty);
+               $('#pimage').attr('src','/'+data.product.product_thambnail);
+
+               $('#product_id').val(id);
+               $('#qty').val(1);
+
+               // Product Price
+
+               if (data.product.discount_price == null) {
+                    $('#pprice').text('');
+                    $('#oldprice').text('');
+                    $('#pprice').text(data.product.selling_price);
+               }
+               else{
+                    $('#pprice').text(data.product.selling_price - data.product.discount_price);
+                    $('#oldprice').text(data.product.selling_price);
+
+               } // end product price
+
+
+               // Product Stock
+
+               if (data.product.product_qty > 0) {
+                    $('#availabe').text('');
+                    $('#stockout').text('');
+                    $('#availabe').text('Available');
+               }
+               else{
+                    $('#stockout').text('')
+                    $('#availabe').text('')
+                    $('#stockout').text('StockOut')
+               }
+
+               // End Stock Product
+
+               //color
+
+               $('select[name="color"]').empty();
+               $.each(data.color,function(key,value){
+
+                    $('select[name="color"]').append('<option value=" '+value+' ">'+value+'</option>')
+
+                    if (data.color == "") {
+                        $('#ColorArea').hide();
+                    }
+                    else{
+                        $('#SizeArea').show();
+                    }
+
+               })
+
+                //size
+
+               $('select[name="size"]').empty();
+               $.each(data.size,function(key,value){
+
+                    $('select[name="size"]').append('<option value=" '+value+' ">'+value+'</option>')
+
+                    if (data.size == "") {
+                        $('#SizeArea').hide();
+                    }
+                    else {
+                        $('#SizeArea').show();
+                    }
+
+               })
+
+               
+            }
+       })
+    }
+
+
+    // End Product View with Model
+
+    // Start Add to card Product
+
+    function addToCart(){
+
+        var product_name = $('#pname').text();
+        var id = $('#product_id').val();
+        var color = $('#color option:selected').text();
+        var size = $('#size option:selected').text();
+        var quantity = $('#qty').val();
+        var d_price = $('#pprice').val();
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            data:{
+                color:color, size:size, quantity:quantity, product_name:product_name, d_price:d_price,
+            },
+            url: "/cart/data/store/"+id,
+            success:function(data){
+                $('#closeModal').click();
+                console.log(data)
+            }
+        })
+
+    }
+
+
+    // End Add to card Product
+
+</script>
+
 
 </body>
 </html>
