@@ -139,7 +139,7 @@
                         </div><!-- /.gallery-holder -->
                         <div class='col-sm-6 col-md-7 product-info-block'>
                             <div class="product-info">
-                                <h1 class="name">
+                                <h1 class="name" id="pname">
                                     @if(session()->get('language') == 'bangla') {{ $product->product_name_bn }} @else
                                     {{ $product->product_name_en }} @endif
                                 </h1>
@@ -227,27 +227,42 @@
 
                                     <div class="col-sm-6">
                                         <div class="form-group">
+                                            @if($product->product_color_en == Null)
+
+                                            @else
+
+
                                             <label class="info-title control-label">Choose Color <span></span></label>
                                             <select class="form-control unicase-form-control selectpicker"
-                                                style="display: none;">
+                                                style="display: none;" id="color">
                                                 <option selected="" disabled="">--Choose Color--</option>
                                                 @foreach($product_color_en as $color)
                                                 <option value="{{ $color }}">{{ ucwords($color) }}</option>
                                                 @endforeach
                                             </select>
+
+                                            @endif
+
                                         </div>
                                     </div>
- 
+
                                     <div class="col-sm-6">
                                         <div class="form-group">
+                                            @if($product->product_size_en == Null)
+
+                                            @else
+
                                             <label class="info-title control-label">Choose Size <span></span></label>
                                             <select class="form-control unicase-form-control selectpicker"
-                                                style="display: none;">
+                                                style="display: none;" id="size">
                                                 <option selected disabled>--Choose Size--</option>
                                                 @foreach($product_size_en as $size)
                                                 <option value="{{ $size }}">{{ ucwords($size) }}</option>
                                                 @endforeach
                                             </select>
+
+                                            @endif
+
                                         </div>
                                     </div>
 
@@ -269,14 +284,16 @@
                                                         <div class="arrow minus gradient"><span class="ir"><i
                                                                     class="icon fa fa-sort-desc"></i></span></div>
                                                     </div>
-                                                    <input type="text" value="1">
+                                                    <input type="text" id="qty" value="1" min="1">
                                                 </div>
                                             </div>
                                         </div>
 
+                                        <input type="hidden" id="product_id" value="{{ $product->id }}" min="1">
                                         <div class="col-sm-7">
-                                            <a href="#" class="btn btn-primary"><i
-                                                    class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</a>
+                                            <button type="submit" class="btn btn-primary" onclick="addToCart()">
+                                                <i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART
+                                            </button>
                                         </div>
 
 
@@ -480,65 +497,67 @@
                     <h3 class="section-title">Related products</h3>
                     <div class="owl-carousel home-owl-carousel upsell-product custom-carousel owl-theme outer-top-xs">
 
-                    	@foreach($relatedProduct as $product)
+                        @foreach($relatedProduct as $product)
 
-                    	@php 
-	                        $amount = $product->discount_price / $product->selling_price;
-	                        $percent = $amount * 100;
+                        @php
+                        $amount = $product->discount_price / $product->selling_price;
+                        $percent = $amount * 100;
 
-	                        $percent_selling_amount = $product->selling_price - $product->selling_price * $amount;
+                        $percent_selling_amount = $product->selling_price - $product->selling_price * $amount;
 
-	                    @endphp
+                        @endphp
 
                         <div class="item item-carousel">
                             <div class="products">
                                 <div class="product">
                                     <div class="product-image">
                                         <div class="image">
-                                            <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en) }}"><img
+                                            <a
+                                                href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en) }}"><img
                                                     src="{{ asset($product->product_thambnail) }}"
                                                     alt="@if(session()->get('language') == 'bangla') {{ $product->product_name_bn }} @else {{ $product->product_name_en }} @endif"></a>
                                         </div><!-- /.image -->
 
                                         <div>
                                             @if($product->discount_price == Null)
-                                                <div class="tag sale"><span>sale</span></div>
+                                            <div class="tag sale"><span>sale</span></div>
                                             @else
-                                                <div class="tag new"><span>{{ round($percent) }} %</span></div>
+                                            <div class="tag new"><span>{{ round($percent) }} %</span></div>
                                             @endif
                                         </div>
-                                        
+
                                     </div><!-- /.product-image -->
                                     <div class="product-info text-left">
                                         <h3 class="name">
-                                        	<a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en) }}">
-                                        		@if(session()->get('language') == 'bangla') 
-                                                    {{ $product->product_name_bn }} 
-                                                @else 
-                                                    {{ $product->product_name_en }} 
+                                            <a
+                                                href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en) }}">
+                                                @if(session()->get('language') == 'bangla')
+                                                {{ $product->product_name_bn }}
+                                                @else
+                                                {{ $product->product_name_en }}
                                                 @endif
-                                        	</a>
+                                            </a>
                                         </h3>
                                         <div class="rating rateit-small"></div>
                                         <div class="description"></div>
 
-                                         @if($product->discount_price == Null)
-                                                <div class="product-price"> 
-                                                <span class="price">
-                                                    $ {{ $product->selling_price }} 
-                                                </span> 
-                                            </div>
-                                            @else
-                                                <div class="product-price"> 
-                                                <span class="price">
-                                                    $ {{ $percent_selling_amount }} 
-                                                </span> 
-                                                <span class="price-before-discount">
-                                                    $ {{ $product->selling_price }}
-                                                </span> 
-                                            </div>
-                                            @endif
-                                        	<!-- /.product-price -->
+                                        @if($product->discount_price == Null)
+                                        <div class="product-price">
+                                            <span class="price">
+                                                $ {{ $product->selling_price }}
+                                            </span>
+                                        </div>
+                                        @else
+                                        <div class="product-price">
+                                            <span class="price">
+                                                $ {{ $percent_selling_amount }}
+                                            </span>
+                                            <span class="price-before-discount">
+                                                $ {{ $product->selling_price }}
+                                            </span>
+                                        </div>
+                                        @endif
+                                        <!-- /.product-price -->
                                     </div><!-- /.product-info -->
                                     <div class="cart clearfix animate-effect">
                                         <div class="action">
@@ -581,12 +600,5 @@
             <div class="clearfix"></div>
         </div><!-- /.row -->
     </div>
-
-
-
-
-
-
-
 
     @endsection
