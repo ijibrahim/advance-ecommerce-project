@@ -12,3 +12,12 @@ git status
 git add .
 git commit -m "modify"
 git push -u origin master
+
+
+
+===================== When full git new project ==============
+composer install 
+npm install 
+np run dev
+php artisan key:generate
+php artisan migrate

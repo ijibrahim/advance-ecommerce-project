@@ -10,11 +10,13 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
+use App\Http\Controllers\Backend\CouponController;
 
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\User\WishlistController;
+use App\Http\Controllers\User\CartPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -187,15 +189,41 @@ Route::prefix('slider')->group(function(){
     // Add To Wish List
     Route::post('/add-to-wishlist/{product_id}', [CartController::class, 'AddToWishList']);
 
-    // Get Wishlist Page
-    Route::get('/wishlist/', [WishlistController::class, 'ViewWishlist'])->name('wishlist');
 
+    // User Middleware
+Route::group(['prefix' => 'user', 'middleware' => ['user','auth'], 'namespace' => 'User' ], function(){
+    // Get Wishlist Page
+    Route::get('/wishlist/', [WishlistController::class, 'ViewWishlist'])->name('wishlist');    
     // Get Wishlist Page
     Route::get('/get-wishlist-product', [WishlistController::class, 'GetWishlistProduct']);
+    // Wish list Remove
+    Route::get('/wishlist-remove/{id}', [WishlistController::class, 'RemoveWishlistProduct']);
+
+
+    });
+
+    // Get mycart Page
+    Route::get('/mycart/', [CartPageController::class, 'MyCart'])->name('mycart');
+    Route::get('/user/get-cart-product', [CartPageController::class, 'GetCartProduct']);
+    Route::get('/user/cart-remove/{rowId}', [CartPageController::class, 'RemoveCartProduct']);
+    Route::get('/cart-increment/{rowId}', [CartPageController::class, 'CartIncrement']);
+    Route::get('/cart-decrement/{rowId}', [CartPageController::class, 'CartDecrement']);
 
 
 
 
+// Admin Coupons All Routes
+
+Route::prefix('coupon')->group(function(){
+    Route::get('/view', [CouponController::class, 'CouponView'])->name('manage-coupon');
+    Route::post('/store', [SliderController::class, 'SliderStore'])->name('slider.store');
+    Route::get('/edit/{id}', [SliderController::class, 'SliderEdit'])->name('slider.edit');
+    Route::post('/update', [SliderController::class, 'SliderUpdate'])->name('slider.update');
+    Route::get('/delete/{id}', [SliderController::class, 'SliderDelete'])->name('slider.delete');
+    Route::get('/inactive/{id}', [SliderController::class, 'SliderInactive'])->name('slider.inactive');
+    Route::get('/active/{id}', [SliderController::class, 'SliderActive'])->name('slider.active');
+
+});
 
 
 
