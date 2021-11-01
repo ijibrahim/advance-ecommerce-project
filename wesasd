@@ -1,0 +1,59 @@
+[33mcommit ae50d84b4ba2c1fe2c7f00248238cc6d7e9ec338[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Ibrahim <amibrahim316@gmail.com>
+Date:   Fri Oct 29 18:02:32 2021 +0600
+
+    wish list complete && mycart complete new backend coupon start  29-10-2021
+
+[33mcommit bcdaa821c935a9b4c795d5bfc6aa6d8210c789be[m
+Author: Ibrahim <amibrahim316@gmail.com>
+Date:   Thu Oct 28 21:46:16 2021 +0600
+
+    mini cart and wish list 28-10-2021
+
+[33mcommit be0569f813259b40772ffffb8523732daab3e88c[m
+Author: Ibrahim <amibrahim316@gmail.com>
+Date:   Wed Oct 27 21:13:20 2021 +0600
+
+    add to cart frontend master page, bumbum99 cart add, cart add with ajax 27-10-2021
+
+[33mcommit f19adc69f2cb6eda0b017c20f5a0fe5a40232630[m
+Author: Ibrahim <amibrahim316@gmail.com>
+Date:   Tue Oct 26 21:52:39 2021 +0600
+
+    frontend page common product tags index backend modify percentage manage product 26-10-2021
+
+[33mcommit 8af70804a9233cb5a4ab035066d3ce52fe5c32b4[m
+Author: Ibrahim <amibrahim316@gmail.com>
+Date:   Thu Oct 21 17:39:18 2021 +0600
+
+    Slider Edit
+
+[33mcommit 9b9986eed82965bd0f9effbc45689aa6c5cbc0ea[m
+Author: Ibrahim <amibrahim316@gmail.com>
+Date:   Thu Oct 21 10:52:51 2021 +0600
+
+    Product view edit details and slider add (morning 21-10-2021)
+
+[33mcommit 419457a634cf125fdd322a5b903f171f0876a9b3[m
+Author: Ibrahim <amibrahim316@gmail.com>
+Date:   Thu Oct 14 18:04:56 2021 +0600
+
+    sub sub category edit and add product design img & multi img script 14/10/2021
+
+[33mcommit 3a83d25eb4fefbe3be21688bde9ebe73ab6c8bfe[m
+Author: Ibrahim <amibrahim316@gmail.com>
+Date:   Tue Oct 12 20:22:04 2021 +0600
+
+    category subCategoryFull and subsubcategoryStart
+
+[33mcommit 597b0e4b8390ad33f15fce03608a18ccca48e2ab[m
+Author: Ibrahim <amibrahim316@gmail.com>
+Date:   Mon Oct 11 19:29:24 2021 +0600
+
+    Brand Controller add edit
+
+[33mcommit fbd08f465192a2db429ada227700f0c4d20ad959[m
+Author: Ibrahim <amibrahim316@gmail.com>
+Date:   Mon Oct 11 12:15:18 2021 +0600
+
+    Multi Auth with theme

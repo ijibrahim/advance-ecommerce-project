@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Backend\ShippingAreaController;
 
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
@@ -216,12 +217,22 @@ Route::group(['prefix' => 'user', 'middleware' => ['user','auth'], 'namespace' =
 
 Route::prefix('coupon')->group(function(){
     Route::get('/view', [CouponController::class, 'CouponView'])->name('manage-coupon');
-    Route::post('/store', [SliderController::class, 'SliderStore'])->name('slider.store');
-    Route::get('/edit/{id}', [SliderController::class, 'SliderEdit'])->name('slider.edit');
-    Route::post('/update', [SliderController::class, 'SliderUpdate'])->name('slider.update');
-    Route::get('/delete/{id}', [SliderController::class, 'SliderDelete'])->name('slider.delete');
-    Route::get('/inactive/{id}', [SliderController::class, 'SliderInactive'])->name('slider.inactive');
-    Route::get('/active/{id}', [SliderController::class, 'SliderActive'])->name('slider.active');
+    Route::post('/store', [CouponController::class, 'CouponStore'])->name('coupon.store');
+    Route::get('/edit/{id}', [CouponController::class, 'CouponEdit'])->name('coupon.edit');
+    Route::post('/update/{id}', [CouponController::class, 'CouponUpdate'])->name('coupon.update');
+    Route::get('/delete/{id}', [CouponController::class, 'CouponDelete'])->name('coupon.delete');
+
+});
+
+
+// Admin Shipping All Routes
+
+Route::prefix('shipping')->group(function(){
+    Route::get('/view', [ShippingAreaController::class, 'DivisionView'])->name('manage-division');
+    Route::post('/store', [ShippingAreaController::class, 'DivisionStore'])->name('division.store');
+    Route::get('/edit/{id}', [ShippingAreaController::class, 'DivisionEdit'])->name('division.edit');
+    Route::post('/update/{id}', [ShippingAreaController::class, 'DivisionUpdate'])->name('division.update');
+    Route::get('/delete/{id}', [ShippingAreaController::class, 'DivisionDelete'])->name('division.delete');
 
 });
 
