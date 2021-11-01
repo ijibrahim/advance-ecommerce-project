@@ -203,7 +203,10 @@ class SubCategoryController extends Controller
         );
 
         return redirect()->back()->with($notification);
-    }
+
+    }  // end method
+
+    
 
 
 
