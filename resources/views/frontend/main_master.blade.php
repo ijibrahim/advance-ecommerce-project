@@ -604,8 +604,11 @@
                 url: '/user/cart-remove/' + id,
                 dataType: 'json',
                 success: function (data) {
+                    CouponCalculation();
                     cart();
                     miniCart();
+                    $('#couponField').show();
+                    $('#coupon_name').val('');
 
                     //Start Message
                     const Toast = Swal.mixin({
@@ -643,9 +646,9 @@
             url: "/cart-increment/"+rowId,
             dataType:'json',
             success:function(data){
+                CouponCalculation();
                 cart();
                 miniCart();
-
             }
         });
     }
@@ -658,21 +661,13 @@
             url: "/cart-decrement/"+rowId,
             dataType:'json',
             success:function(data){
+                CouponCalculation();
                 cart();
                 miniCart();
                 
             }
         });
     }
-
-
-
-
-
-
-
-
-
         // End  Load My Cart -->
     </script>
 
@@ -691,7 +686,8 @@
                 data:{coupon_name:coupon_name},
                 url:"{{ url('/coupon-apply') }}",
                 success:function(data){
-
+                     CouponCalculation();
+                     $('#couponField').hide();
                      //Start Message
                     const Toast = Swal.mixin({
                         toast: true,
@@ -728,7 +724,6 @@
                 url: "{{ url('/coupon-calculation') }}",
                 dataType:'json',
                 success:function(data){
-                    console.log(data);
                     if (data.total) {
                         $('#couponCalField').html(
                             `<tr>
@@ -749,11 +744,12 @@
                             `<tr>
                                 <th>
                                     <div class="cart-sub-total">
-                                        Subtotal<span class="inner-left-md">$ '${data.subtotal}'</span>
+                                        Subtotal<span class="inner-left-md">$ ${data.subtotal}</span>
                                     </div>
 
                                     <div class="cart-sub-total">
-                                        Coupon<span class="inner-left-md">$ ${data.coupon_name}</span>
+                                        Coupon<span class="inner-left-md"> ${data.coupon_name}</span>
+                                        <button type="submit" onclick="couponRemove()"><i  class="fa fa-times"></i></button>
                                     </div>
                                     
                                     <div class="cart-sub-total">
@@ -772,6 +768,50 @@
         }
 
         CouponCalculation();
+    </script>
+
+    <script type="text/javascript">
+        
+        // Start Coupon Remove
+
+        function couponRemove() {
+            $.ajax({
+                type:'GET',
+                url:"{{ url('/coupon-remove') }}",
+                dataType:'json',
+                success:function(data){
+
+                    CouponCalculation();
+                    $('#couponField').show();
+                    $('#coupon_name').val('');
+                     //Start Message
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+
+                    if ($.isEmptyObject(data.error)) {
+                        Toast.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: data.success
+                        })
+                    } else {
+                        Toast.fire({
+                            type: 'error',
+                            icon: 'error',
+                            title: data.error
+                        })
+                    }
+
+                    // End Message
+                }
+            });
+        }
+
+
     </script>
 
 

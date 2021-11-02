@@ -16,6 +16,10 @@ class CartController extends Controller
 {
     public function AddToCart(Request $request, $id){
 
+        if (Session::has('coupon')) {
+            Session::forget('coupon');
+        }
+
         $product = Product::findOrFail($id);
 
         if ($product->discount_price == NULL) {
@@ -146,29 +150,69 @@ class CartController extends Controller
 
 
     public function CouponCalculation(){
-
         if (Session::has('coupon')) {
-            
             return response()->json(array(
-
                 'subtotal' => Cart::total(),
                 'coupon_name' => session()->get('coupon')['coupon_name'],
                 'coupon_discount' => session()->get('coupon')['coupon_discount'],
                 'discount_amount' => session()->get('coupon')['discount_amount'],
                 'total_amount' => session()->get('coupon')['total_amount'],
-
             ));         
         }
         else{
-
             return response()->json(array(
-
                 'total' => Cart::total(),
             )); 
+        }
+    } // end method
+
+
+// Remove Coupon Start
+    public function CouponRemove(){
+        Session::forget('coupon');
+        return response()->json(['success' => 'Coupon Remove Successfully']);
+    } // end method
+
+//===================== Cart Checkout Start ==================
+
+    public function CheckoutCreate(){
+        if (Auth::check()) {
+            if (Cart::total() > 0) {
+
+                $carts = Cart::content();
+                $cartQty = Cart::count();
+                $cartTotal = Cart::total();
+
+                return view('frontend.checkout.checkout_view',compact('carts','cartQty','cartTotal'));
+
+            }
+            else{
+
+            $notification = array(
+            'message' => 'Shopping At First one Product',
+            'alert-type' => 'error'
+        );
+
+        return redirect()->to('/')->with($notification);
+            }
+        }
+        else{
+
+            $notification = array(
+            'message' => 'You Need to Login First',
+            'alert-type' => 'error'
+        );
+
+        return redirect()->route('login')->with($notification);
 
         }
+    }
 
-    } // end method
+
+//===================== Cart Checkout End ==================
+
+
+
 
 
 }
