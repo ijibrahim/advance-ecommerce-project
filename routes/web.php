@@ -18,6 +18,7 @@ use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\User\CartPageController;
+use App\Http\Controllers\User\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -259,6 +260,8 @@ Route::prefix('shipping')->group(function(){
     Route::get('/coupon-calculation', [CartController::class, 'CouponCalculation']);
     Route::get('/coupon-remove', [CartController::class, 'CouponRemove']);
     Route::get('/checkout', [CartController::class, 'CheckoutCreate'])->name('checkout');
+    Route::get('/district-get/ajax/{division_id}', [CheckoutController::class, 'DistrictGetAjax']);
+    Route::get('/state-get/ajax/{district_id}', [CheckoutController::class, 'StateGetAjax']);
 
 
 

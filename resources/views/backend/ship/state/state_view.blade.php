@@ -85,8 +85,8 @@
 									<h5>District Select <span class="text-danger">*</span></h5>
 									<div class="controls">
 										<select name="district_id" class="form-control">
-											<option value="" selected="" disabled="">Select District</option>
 											@foreach($districts as $district)
+											<option value="" selected="" disabled="">Select District</option>
 											
 											@endforeach
 										</select>
@@ -128,7 +128,7 @@
 	  </div>
 
 
-<script>
+<script language="JavaScript" type="text/javascript" >
 	$(document).ready(function(){
 		$('select[name="division_id"]').on('change', function(){
 			var division_id = $(this).val();

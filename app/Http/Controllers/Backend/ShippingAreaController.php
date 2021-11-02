@@ -27,7 +27,7 @@ class ShippingAreaController extends Controller
         
 
         ShipDivision::insert([
-            'division_name' => ucfirst($request->division_name),
+            'division_name' => ucwords($request->division_name),
             'created_at' => Carbon::now(),
 
         ]);
@@ -50,7 +50,7 @@ class ShippingAreaController extends Controller
     public function DivisionUpdate(Request $request, $id){
 
     	ShipDivision::findOrFail($id)->update([
-            'division_name' =>  ucfirst($request->division_name),
+            'division_name' =>  ucwords($request->division_name),
             'updated_at' => Carbon::now(),
 
         ]);
@@ -95,7 +95,7 @@ class ShippingAreaController extends Controller
 
         ShipDistrict::insert([
             'division_id' => $request->division_id,
-            'district_name' => ucfirst($request->district_name),
+            'district_name' => ucwords($request->district_name),
             'created_at' => Carbon::now(),
 
         ]);
@@ -119,7 +119,7 @@ class ShippingAreaController extends Controller
         ShipDistrict::findOrFail($id)->update([
 
             'division_id' => $request->division_id,
-            'district_name' =>  ucfirst($request->district_name),
+            'district_name' =>  ucwords($request->district_name),
             'updated_at' => Carbon::now(),
 
         ]);
@@ -175,7 +175,7 @@ class ShippingAreaController extends Controller
         ShipState::insert([
             'division_id' => $request->division_id,
             'district_id' => $request->district_id,
-            'state_name' => ucfirst($request->state_name),
+            'state_name' => ucwords($request->state_name),
             'created_at' => Carbon::now(),
 
         ]);
@@ -201,7 +201,7 @@ class ShippingAreaController extends Controller
         ShipState::findOrFail($id)->update([
             'division_id' => $request->division_id,
             'district_id' => $request->district_id,
-            'state_name' => ucfirst($request->state_name),
+            'state_name' => ucwords($request->state_name),
             'updated_at' => Carbon::now(),
 
         ]);
