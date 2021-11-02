@@ -23,6 +23,8 @@ My Checkout
     <div class="container">
         <div class="checkout-box ">
             <div class="row">
+            	<form class="register-form" action="{{ route('checkout.store') }}" method="POST">
+            		@csrf
                 <div class="col-md-8">
                     <div class="panel-group checkout-steps" id="accordion">
                         <!-- checkout-step-01  -->
@@ -33,10 +35,8 @@ My Checkout
 
                                 <!-- panel-body  -->
                                 <div class="panel-body">
-                                    <div class="row">       
+                                    <div class="row">    
 
-                                                   
-                                        <form class="register-form" role="form">
                                             <div class="col-md-6 col-sm-6 already-registered-login">
                                                 <h4 class="checkout-subtitle"><b> Shipping Address </b></h4>
 
@@ -116,12 +116,9 @@ My Checkout
                                                     
                                                 </div>
 
-                                                  <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Login</button>
-                                                </form>
+                                                  
+                                                
                                             </div>  
-
-                                        </form>
-                                       
                                        
                                     </div>          
                                 </div>
@@ -136,69 +133,111 @@ My Checkout
                 </div>
                 <div class="col-md-4">
                     <!-- checkout-progress-sidebar -->
-<div class="checkout-progress-sidebar ">
-    <div class="panel-group">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="unicase-checkout-title">Your Checkout Progress</h4>
-            </div>
-            <div class="">
-                <ul class="nav nav-checkout-progress list-unstyled">
+                <div class="checkout-progress-sidebar ">
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="unicase-checkout-title">Your Checkout Progress</h4>
+                            </div>
+                            <div class="">
+                                <ul class="nav nav-checkout-progress list-unstyled">
 
-                    @foreach($carts as $item)
-                    <li>
-                        <strong>Image: </strong>
-                        <img src="{{ asset($item->options->image) }}" alt="{{ $item->name }}" width="50" height="50">
-                    </li><br>
-                    <li>
-                        <strong>Qty: </strong>
-                        ({{ $item->qty }})
+                                    @foreach($carts as $item)
+                                    <li>
+                                        <strong>Image: </strong>
+                                        <img src="{{ asset($item->options->image) }}" alt="{{ $item->name }}" width="50" height="50">
+                                    </li><br>
+                                    <li>
+                                        <strong>Qty: </strong>
+                                        ({{ $item->qty }})
 
-                        <strong>color: </strong>
-                        {{ $item->options->color }}
+                                        <strong>color: </strong>
+                                        {{ $item->options->color }}
 
-                        <strong>Size: </strong>
-                        {{ $item->options->size }}
-                        
-                    </li>
-                    @endforeach
+                                        <strong>Size: </strong>
+                                        {{ $item->options->size }}
+                                        
+                                    </li>
+                                    @endforeach
 
-                    
+                                    
 
-                    <li>
+                                    <li>
 
-                        @if(Session::has('coupon'))
-                        <hr>
-                        <strong>SubTotal: </strong> ${{ $cartTotal }}
-                        <hr>
-                        <strong>Coupon Name: </strong> {{ session()->get('coupon')['coupon_name'] }}
-                        ({{ session()->get('coupon')['coupon_discount'] }}%)
-                        <hr>
-                        <strong>Coupon Discount: </strong> {{ session()->get('coupon')['discount_amount'] }}
-                        <hr>
-                        <strong>Grand Total: </strong> {{ session()->get('coupon')['total_amount'] }}
+                                        @if(Session::has('coupon'))
+                                        <hr>
+                                        <strong>SubTotal: </strong> ${{ $cartTotal }}
+                                        <hr>
+                                        <strong>Coupon Name: </strong> {{ session()->get('coupon')['coupon_name'] }}
+                                        ({{ session()->get('coupon')['coupon_discount'] }}%)
+                                        <hr>
+                                        <strong>Coupon Discount: </strong> {{ session()->get('coupon')['discount_amount'] }}
+                                        <hr>
+                                        <strong>Grand Total: </strong> {{ session()->get('coupon')['total_amount'] }}
 
-                        @else
+                                        @else
 
-                        <hr>
-                        <strong>SubTotal: </strong>  ${{ $cartTotal }}
-                        <hr>
-                        <strong>Grand Total: </strong>  ${{ $cartTotal * $cartQty}}
+                                        <hr>
+                                        <strong>SubTotal: </strong>  ${{ $cartTotal }}
+                                        <hr>
+                                        <strong>Grand Total: </strong>  ${{ $cartTotal * $cartQty}}
 
-                        @endif
-                        <hr>
-                    </li>
-                </ul>       
-            </div>
-        </div>
-    </div>
-</div> 
-<!-- checkout-progress-sidebar -->              </div>
-            </div><!-- /.row -->
-        </div><!-- /.checkout-box -->
+                                        @endif
+                                        <hr>
+                                    </li>
+                                </ul>       
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+<!-- checkout-progress-sidebar -->              
+</div>
+
+
+ <div class="col-md-4">
+                    <!-- checkout-progress-sidebar -->
+                <div class="checkout-progress-sidebar ">
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="unicase-checkout-title">Select Payment Method</h4>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                	<label for="">Stripe</label>
+                                	<input type="radio" name="payment_method" value="stripe">
+                                	<img src="{{ asset('frontend/assets/images/payments/4.png') }}">
+                                </div>	<!-- /col-md-4 -->
+                                <div class="col-md-4">
+                                	<label for="">Card</label>
+                                	<input type="radio" name="payment_method" value="card">
+                                	<img src="{{ asset('frontend/assets/images/payments/3.png') }}">
+                                </div>	<!-- /col-md-4 -->
+                                <div class="col-md-4">
+                                	<label for="">Cash</label>
+                                	<input type="radio" name="payment_method" value="cash">
+                                	<img src="{{ asset('frontend/assets/images/payments/2.png') }}">
+                                </div>	<!-- /col-md-4 -->
+                            </div><!-- /row -->
+                            <hr>
+                            <button type="submit" class="btn-upper btn btn-primary checkout-page-button">PAYMENT STEP</button>
+                        </div>
+                    </div>
+                </div> 
+<!-- checkout-progress-sidebar -->              
+</div>
+
+
+
+</form>
+</div><!-- /.row -->
+</div><!-- /.checkout-box -->
         <!-- ============================================== BRANDS CAROUSEL ============================================== -->
         @include('frontend.body.brands')
-<!-- ============================================== BRANDS CAROUSEL : END ============================================== -->    </div><!-- /.container -->
+<!-- ============================================== BRANDS CAROUSEL : END ============================================== -->    
+</div><!-- /.container -->
 </div><!-- /.body-content -->
 
 
