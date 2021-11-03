@@ -19,6 +19,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\User\CheckoutController;
+use App\Http\Controllers\User\StripeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -200,7 +201,9 @@ Route::group(['prefix' => 'user', 'middleware' => ['user','auth'], 'namespace' =
     Route::get('/get-wishlist-product', [WishlistController::class, 'GetWishlistProduct']);
     // Wish list Remove
     Route::get('/wishlist-remove/{id}', [WishlistController::class, 'RemoveWishlistProduct']);
-
+    // Strip Payment
+    Route::post('/stripe/order/', [StripeController::class, 'StripeOrder'])->name('stripe.order');
+    
 
     });
 
