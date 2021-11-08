@@ -121,26 +121,23 @@
         </li>       
      
         <li class="header nav-small-cap">User Interface</li>
-		  
-        <li class="treeview">
+                 
+        <li class="treeview {{ ($prefix == '/orders')?'active':'' }}  ">
           <a href="#">
-            <i data-feather="grid"></i>
-            <span>Components</span>
+            <i data-feather="file"></i>
+            <span>Orders</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="components_alerts.html"><i class="ti-more"></i>Alerts</a></li>
-            <li><a href="components_badges.html"><i class="ti-more"></i>Badge</a></li>
-            <li><a href="components_buttons.html"><i class="ti-more"></i>Buttons</a></li>
-            <li><a href="components_sliders.html"><i class="ti-more"></i>Sliders</a></li>
-            <li><a href="components_dropdown.html"><i class="ti-more"></i>Dropdown</a></li>
-            <li><a href="components_modals.html"><i class="ti-more"></i>Modal</a></li>
-            <li><a href="components_nestable.html"><i class="ti-more"></i>Nestable</a></li>
-            <li><a href="components_progress_bars.html"><i class="ti-more"></i>Progress Bars</a></li>
+            <li class="{{ ($route == 'panding-orders')? 'active':'' }}"><a href="{{ route('panding-orders') }}"><i class="ti-more"></i>Panding Orders</a></li>
+            <li class="{{ ($route == 'manage-district')? 'active':'' }}"><a href="{{ route('manage-district') }}"><i class="ti-more"></i>Ship District</a></li>
+            <li class="{{ ($route == 'manage-state')? 'active':'' }}"><a href="{{ route('manage-state') }}"><i class="ti-more"></i>Ship State</a></li>
+            
+            
           </ul>
-        </li>
+        </li> 
 		
 		<li class="treeview">
           <a href="#">

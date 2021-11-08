@@ -164,10 +164,16 @@
                     </div>
                 </div>
                 
+            </div> {{-- //end order Item row --}}
+
+            @if($order->status !== "delivered")
+
+            @else
+            <div class="form-group">
+                <label for="label">Order Return Reason: </label>
+                <textarea name="return_reason" id="" class="form-control" cols="30" rows="10">Return Reason</textarea>
             </div>
-
-
-
+            @endif
         </div> <!-- end row -->
     </div>
 </div>
