@@ -691,7 +691,10 @@
                 url:"{{ url('/coupon-apply') }}",
                 success:function(data){
                      CouponCalculation();
-                     $('#couponField').hide();
+                     if (data.validity == true) {
+                        $('#couponField').hide();
+
+                     }
                      //Start Message
                     const Toast = Swal.mixin({
                         toast: true,

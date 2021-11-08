@@ -109,7 +109,7 @@ My Checkout
                                                 <!-- End Form Group -->
 
                                                     <div class="form-group">
-                                                        <label class="info-title" for="postCode"><b>Post Code </b><span>*</span></label>
+                                                        <label class="info-title" for="postCode"><b>Note </b><span>*</span></label>
                                                         <textarea class="form-control" cols="30" rows="5" placeholder="Notes" name="notes"></textarea>
                                                     </div>
                                                 <!-- End Form Group -->
@@ -218,7 +218,7 @@ My Checkout
                                 <div class="col-md-4">
                                 	<label for="">Cash</label>
                                 	<input type="radio" name="payment_method" value="cash">
-                                	<img src="{{ asset('frontend/assets/images/payments/2.png') }}">
+                                	<img src="{{ asset('frontend/assets/images/payments/6.png') }}">
                                 </div>	<!-- /col-md-4 -->
                             </div><!-- /row -->
                             <hr>
