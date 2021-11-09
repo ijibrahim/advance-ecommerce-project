@@ -241,6 +241,18 @@ Route::prefix('coupon')->group(function(){
 
 Route::prefix('orders')->group(function(){
     Route::get('/panding/orders', [OrderController::class, 'PandingOrders'])->name('panding-orders');
+    Route::get('/panding/order/details/{id}', [OrderController::class, 'PandingOrdersDetails'])->name('panding.order.details');
+    Route::get('/confirmed/order/', [OrderController::class, 'ConfirmedOrder'])->name('confirmed-order');
+    Route::get('/processing/order/', [OrderController::class, 'ProcessingOrder'])->name('processing-order');
+    Route::get('/picked/order/', [OrderController::class, 'PickedOrder'])->name('picked-order');
+    Route::get('/shipped/order/', [OrderController::class, 'ShippedOrder'])->name('shipped-order');
+    Route::get('/cancel/order/', [OrderController::class, 'CancelOrder'])->name('cancel-order');
+// Change or Update Status
+    Route::get('/panding/confirm/{order_id}', [OrderController::class, 'PandingConfirm'])->name('panding-confirm');
+    Route::get('/confirm/processing/{order_id}', [OrderController::class, 'ConfirmProcessing'])->name('confirm-processing');
+    Route::get('/processing/picked/{order_id}', [OrderController::class, 'ProcessingPicked'])->name('processing-picked');
+    Route::get('/picked/shipped/{order_id}', [OrderController::class, 'PickedShipped'])->name('picked-shipped');
+    Route::get('/shipped/cancel/{order_id}', [OrderController::class, 'ShippedCancel'])->name('shipped-cancel');
 
 });
 

@@ -132,8 +132,11 @@
           </a>
           <ul class="treeview-menu">
             <li class="{{ ($route == 'panding-orders')? 'active':'' }}"><a href="{{ route('panding-orders') }}"><i class="ti-more"></i>Panding Orders</a></li>
-            <li class="{{ ($route == 'manage-district')? 'active':'' }}"><a href="{{ route('manage-district') }}"><i class="ti-more"></i>Ship District</a></li>
-            <li class="{{ ($route == 'manage-state')? 'active':'' }}"><a href="{{ route('manage-state') }}"><i class="ti-more"></i>Ship State</a></li>
+            <li class="{{ ($route == 'confirmed-order')? 'active':'' }}"><a href="{{ route('confirmed-order') }}"><i class="ti-more"></i>Confirm Order</a></li>
+            <li class="{{ ($route == 'processing-order')? 'active':'' }}"><a href="{{ route('processing-order') }}"><i class="ti-more"></i>Processing Order</a></li>
+            <li class="{{ ($route == 'picked-order')? 'active':'' }}"><a href="{{ route('picked-order') }}"><i class="ti-more"></i>Picked Order</a></li>
+            <li class="{{ ($route == 'shipped-order')? 'active':'' }}"><a href="{{ route('shipped-order') }}"><i class="ti-more"></i>Shipped Order</a></li>
+            <li class="{{ ($route == 'cancel-order')? 'active':'' }}"><a href="{{ route('cancel-order') }}"><i class="ti-more"></i>Cancel Order</a></li>
             
             
           </ul>
