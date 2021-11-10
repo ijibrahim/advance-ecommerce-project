@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use Auth;
 use Carbon\Carbon;
+use PDF;
 
 
 class OrderController extends Controller
@@ -182,6 +183,21 @@ class OrderController extends Controller
         return redirect()->route('delivered-order')->with($notification);
 
     } // End method 
+
+
+    public function AdminInvoiceDownload($order_id){
+
+        
+        $order = Order::with('division','district','state','user')->where('id',$order_id)->first();
+        $orderItem = OrderItem::with('product')->where('order_id',$order_id)->orderBy('id','DESC')->get();
+
+        $pdf = PDF::loadView('backend.orders.order_invoice',compact('order','orderItem'))->setPaper('a4')->setOptions([
+            'tempDir' => public_path(),
+            'chroot' => public_path(),
+        ]);
+        return $pdf->download('invoice.pdf');
+
+    }
 
 
 }

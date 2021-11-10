@@ -46,8 +46,8 @@
 								<td><span class="badge badge-pill badge-primary">{{ $item->status }}</span></td>
 								
 								<td>
-									<a href="{{ route('panding.order.details',$item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-eye"></i></a>
-									<a href="{{ route('coupon.delete',$item->id) }}" class="btn btn-danger" title="Delete Data" id="delete"><i class="fa fa-trash"></i></a>
+									<a href="{{ route('panding.order.details',$item->id) }}" class="btn btn-info" title="Product Details"><i class="fa fa-eye"></i></a>
+									
 								</td>
 							</tr>
 							@endforeach

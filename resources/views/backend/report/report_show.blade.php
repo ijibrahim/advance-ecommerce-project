@@ -17,7 +17,7 @@
 
 			 <div class="box">
 				<div class="box-header with-border">
-				  <h3 class="box-title">Confirmed Orders List</h3>
+				  <h3 class="box-title">Orders List</h3>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -36,10 +36,8 @@
 						<tbody>
 							@foreach($orders as $item)
 							<tr>
-								<td>
-									{{ $item->order_date }}
-								</td>
-								{{-- <td>{{ $item->order_date }}</td> --}}
+								<td>{{ $item->order_date }}</td>
+								
 								<td>{{ $item->invoice_no }}</td>
 								<td>${{ $item->amount }}</td>
 								<td>{{ $item->payment_method }}</td>
