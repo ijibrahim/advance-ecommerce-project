@@ -49,6 +49,14 @@ class OrderController extends Controller
         $orders = Order::where('status','Shipped')->orderBy('id','DESC')->get();
         return view('backend.orders.shipped_orders',compact('orders'));
     }
+
+    public function DeliveredOrder(){
+
+        $orders = Order::where('status','Delivered')->orderBy('id','DESC')->get();
+        return view('backend.orders.delivered_orders',compact('orders'));
+    }
+
+
     public function CancelOrder(){
 
         $orders = Order::where('status','Cancel')->orderBy('id','DESC')->get();
@@ -111,7 +119,7 @@ class OrderController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('picked-order')->with($notification);
+        return redirect()->route('processing-order')->with($notification);
 
     } // End method 
 
@@ -131,12 +139,32 @@ class OrderController extends Controller
             'alert-type' => 'success'
         );
 
+        return redirect()->route('picked-order')->with($notification);
+
+    } // End method 
+
+
+    public function ShippedDelivered($order_id){
+
+        $order = Order::findOrFail($order_id)->update([
+
+            'status' => 'Delivered',
+            'delivered_date' => Carbon::now(),
+
+        ]);
+
+
+       $notification = array(
+            'message' => 'Order Delivered Successfully',
+            'alert-type' => 'success'
+        );
+
         return redirect()->route('shipped-order')->with($notification);
 
     } // End method 
 
 
-    public function ShippedCancel($order_id){
+    public function DeliveredCancel($order_id){
 
         $order = Order::findOrFail($order_id)->update([
 
@@ -151,7 +179,7 @@ class OrderController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('cancel-order')->with($notification);
+        return redirect()->route('delivered-order')->with($notification);
 
     } // End method 
 

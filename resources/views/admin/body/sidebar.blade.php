@@ -136,6 +136,7 @@
             <li class="{{ ($route == 'processing-order')? 'active':'' }}"><a href="{{ route('processing-order') }}"><i class="ti-more"></i>Processing Order</a></li>
             <li class="{{ ($route == 'picked-order')? 'active':'' }}"><a href="{{ route('picked-order') }}"><i class="ti-more"></i>Picked Order</a></li>
             <li class="{{ ($route == 'shipped-order')? 'active':'' }}"><a href="{{ route('shipped-order') }}"><i class="ti-more"></i>Shipped Order</a></li>
+            <li class="{{ ($route == 'delivered-order')? 'active':'' }}"><a href="{{ route('delivered-order') }}"><i class="ti-more"></i>Delivered Order</a></li>
             <li class="{{ ($route == 'cancel-order')? 'active':'' }}"><a href="{{ route('cancel-order') }}"><i class="ti-more"></i>Cancel Order</a></li>
             
             
