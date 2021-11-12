@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\ShippingAreaController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ReportController;
+use App\Http\Controllers\Backend\BlogController;
 
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
@@ -321,8 +322,23 @@ Route::prefix('shipping')->group(function(){
 
     Route::prefix('allusers')->group(function(){
 
-
     Route::get('/view', [AdminProfileController::class, 'AllUsers'])->name('all-users');  
+
+
+});
+
+
+// Admin Get Blog Route
+
+    Route::prefix('blog')->group(function(){
+
+    Route::get('/cagegory', [BlogController::class, 'BlogCategory'])->name('blog.category');  
+    Route::post('/store', [BlogController::class, 'BlogCategoryStore'])->name('blogcategory.store');  
+    Route::get('/category/edit/{id}', [BlogController::class, 'BlogCategoryEdit'])->name('blog.category.edit');  
+    Route::post('/update', [BlogController::class, 'BlogCategoryUpdate'])->name('blogcategory.update');  
+    Route::get('/delete/{id}', [BlogController::class, 'BlogCategoryDelete'])->name('blog.category.delete');  
+    // Admin View Blog Post
+    Route::get('/view/post', [BlogController::class, 'ViewBlogPost'])->name('view.category');  
 
 
 });
