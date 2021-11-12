@@ -271,12 +271,12 @@
 
                 </div>
                 <!-- /.info-boxes -->
-                <!-- ============================================== INFO BOXES : END ============================================== -->
+                <!-- ====================== INFO BOXES : END ==================== -->
 
 
 
 
-                <!-- ============================================== SCROLL TABS ============================================== -->
+                <!-- ========================== New Product Start =================== -->
                 <div id="product-tabs-slider" class="scroll-tabs outer-top-vs wow fadeInUp">
                     <div class="more-info-tab clearfix ">
                         <h3 class="new-product-title pull-left">
@@ -376,7 +376,6 @@
                                                                 </button>
                                                                 <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                                                             </li>
-
                                                             
                                                                 <button class="btn btn-primary icon" type="button" title="Wishlist"  id="{{ $product->id }}" onclick="addToWishList(this.id)"> 
                                                                     <i class="icon fa fa-heart"></i> 
@@ -534,8 +533,8 @@
                     <!-- /.tab-content -->
                 </div>
                 <!-- /.scroll-tabs -->
-                <!-- ============================================== SCROLL TABS : END ============================================== -->
-                <!-- ============================================== WIDE PRODUCTS ============================================== -->
+                <!-- ===================== New Product : END ==================== -->
+                <!-- ================== WIDE PRODUCTS Banner ========================= -->
                 <div class="wide-banners wow fadeInUp outer-bottom-xs">
                     <div class="row">
                         <div class="col-md-7 col-sm-7">
@@ -561,8 +560,8 @@
                 </div>
                 <!-- /.wide-banners -->
 
-                <!-- ============================================== WIDE PRODUCTS : END ============================================== -->
-                <!-- ============================================== FEATURED PRODUCTS ============================================== -->
+                <!-- ====================== WIDE PRODUCTS : END =================== -->
+                <!-- ===================== FEATURED PRODUCTS ===================== -->
                 <section class="section featured-product wow fadeInUp">
                     <h3 class="section-title">@if(session()->get('language') == 'bangla') ফিউচার প্রোডাক্টস @else Featured products @endif</h3>
                     <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
@@ -630,21 +629,25 @@
                                             <div class="action">
                                                 <ul class="list-unstyled">
                                                     <li class="add-cart-button btn-group">
-                                                        <button data-toggle="tooltip"
+                                                        <button
                                                             class="btn btn-primary icon" type="button"
-                                                            title="Add Cart"> <i
+                                                            title="Add Cart"  data-toggle="modal" data-target="#exampleModal"  id="{{ $product->id }}" onclick="productView(this.id)"> <i
                                                                 class="fa fa-shopping-cart"></i> </button>
                                                         <button class="btn btn-primary cart-btn"
                                                             type="button">Add to cart</button>
                                                     </li>
-                                                    <li class="lnk wishlist"> <a data-toggle="tooltip"
-                                                            class="add-to-cart" href="detail.html"
-                                                            title="Wishlist"> <i class="icon fa fa-heart"></i>
-                                                        </a> </li>
-                                                    <li class="lnk"> <a data-toggle="tooltip"
-                                                            class="add-to-cart" href="detail.html"
-                                                            title="Compare"> <i class="fa fa-signal"
-                                                                aria-hidden="true"></i> </a> </li>
+                                                    
+
+                                                        <button class="btn btn-primary icon" type="button" title="Wishlist"  id="{{ $product->id }}" onclick="addToWishList(this.id)"> 
+                                                            <i class="icon fa fa-heart"></i> 
+                                                        </button> 
+                                                    
+                                                    <li class="lnk"> 
+                                                        <a data-toggle="tooltip" class="add-to-cart" href="#" title="Compare"> 
+                                                            <i class="fa fa-signal" aria-hidden="true"></i> 
+                                                        </a> 
+                                                    </li>
+
                                                 </ul>
                                             </div>
                                             <!-- /.action -->
@@ -662,10 +665,10 @@
                     <!-- /.home-owl-carousel -->
                 </section>
                 <!-- /.section -->
-                <!-- ============================================== FEATURED PRODUCTS : END ============================================== -->
+                <!-- =========================== FEATURED PRODUCTS : END ========================= -->
 
 
-<!-- ============================================== Skip product 0 PRODUCTS ============================================== -->
+            <!-- ================== Fashion PRODUCTS : Start ================== -->
                 <section class="section featured-product wow fadeInUp">
                     <h3 class="section-title"> @if(session()->get('language') == 'bangla') {{ $skip_category_0->category_name_bn }} @else {{ $skip_category_0->category_name_en }}  @endif </h3>
                     <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
@@ -733,21 +736,25 @@
                                             <div class="action">
                                                 <ul class="list-unstyled">
                                                     <li class="add-cart-button btn-group">
-                                                        <button data-toggle="tooltip"
+                                                        <button
                                                             class="btn btn-primary icon" type="button"
-                                                            title="Add Cart"> <i
+                                                            title="Add Cart"  data-toggle="modal" data-target="#exampleModal"  id="{{ $product->id }}" onclick="productView(this.id)"> <i
                                                                 class="fa fa-shopping-cart"></i> </button>
                                                         <button class="btn btn-primary cart-btn"
                                                             type="button">Add to cart</button>
                                                     </li>
-                                                    <li class="lnk wishlist"> <a data-toggle="tooltip"
-                                                            class="add-to-cart" href="detail.html"
-                                                            title="Wishlist"> <i class="icon fa fa-heart"></i>
-                                                        </a> </li>
-                                                    <li class="lnk"> <a data-toggle="tooltip"
-                                                            class="add-to-cart" href="detail.html"
-                                                            title="Compare"> <i class="fa fa-signal"
-                                                                aria-hidden="true"></i> </a> </li>
+                                                    
+
+                                                        <button class="btn btn-primary icon" type="button" title="Wishlist"  id="{{ $product->id }}" onclick="addToWishList(this.id)"> 
+                                                            <i class="icon fa fa-heart"></i> 
+                                                        </button> 
+                                                    
+                                                    <li class="lnk"> 
+                                                        <a data-toggle="tooltip" class="add-to-cart" href="#" title="Compare"> 
+                                                            <i class="fa fa-signal" aria-hidden="true"></i> 
+                                                        </a> 
+                                                    </li>
+
                                                 </ul>
                                             </div>
                                             <!-- /.action -->
@@ -765,9 +772,9 @@
                     <!-- /.home-owl-carousel -->
                 </section>
                 <!-- /.section -->
-                <!-- ============================================== Skip Product 0 PRODUCTS : END ============================================== -->
+                <!-- ===================== Fashion  PRODUCTS : END ============================== -->
 
-<!-- ============================================== Skip product 1 PRODUCTS ============================================== -->
+<!-- ================== ELECTRONICS PRODUCTS : START ============================== -->
                 <section class="section featured-product wow fadeInUp">
                     <h3 class="section-title"> @if(session()->get('language') == 'bangla') {{ $skip_category_1->category_name_bn }} @else {{ $skip_category_1->category_name_en }}  @endif </h3>
                     <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
@@ -835,21 +842,24 @@
                                             <div class="action">
                                                 <ul class="list-unstyled">
                                                     <li class="add-cart-button btn-group">
-                                                        <button data-toggle="tooltip"
+                                                        <button
                                                             class="btn btn-primary icon" type="button"
-                                                            title="Add Cart"> <i
+                                                            title="Add Cart"  data-toggle="modal" data-target="#exampleModal"  id="{{ $product->id }}" onclick="productView(this.id)"> <i
                                                                 class="fa fa-shopping-cart"></i> </button>
                                                         <button class="btn btn-primary cart-btn"
                                                             type="button">Add to cart</button>
                                                     </li>
-                                                    <li class="lnk wishlist"> <a data-toggle="tooltip"
-                                                            class="add-to-cart" href="detail.html"
-                                                            title="Wishlist"> <i class="icon fa fa-heart"></i>
-                                                        </a> </li>
-                                                    <li class="lnk"> <a data-toggle="tooltip"
-                                                            class="add-to-cart" href="detail.html"
-                                                            title="Compare"> <i class="fa fa-signal"
-                                                                aria-hidden="true"></i> </a> </li>
+
+                                                        <button class="btn btn-primary icon" type="button" title="Wishlist"  id="{{ $product->id }}" onclick="addToWishList(this.id)"> 
+                                                            <i class="icon fa fa-heart"></i> 
+                                                        </button> 
+                                                    
+                                                    <li class="lnk"> 
+                                                        <a data-toggle="tooltip" class="add-to-cart" href="#" title="Compare"> 
+                                                            <i class="fa fa-signal" aria-hidden="true"></i> 
+                                                        </a> 
+                                                    </li>
+
                                                 </ul>
                                             </div>
                                             <!-- /.action -->
@@ -867,10 +877,10 @@
                     <!-- /.home-owl-carousel -->
                 </section>
                 <!-- /.section -->
-                <!-- ============================================== Skip Product 1 PRODUCTS : END ============================================== -->
+                <!-- ============================ ELECTRONICS PRODUCTS : END ======================= -->
 
 
-                <!-- ============================================== WIDE PRODUCTS ============================================== -->
+                <!-- ==================== WIDE PRODUCTS ============================ -->
                 <div class="wide-banners wow fadeInUp outer-bottom-xs">
                     <div class="row">
                         <div class="col-md-12">
@@ -897,10 +907,10 @@
                     <!-- /.row -->
                 </div>
                 <!-- /.wide-banners -->
-                <!-- ============================================== WIDE PRODUCTS : END ============================================== -->
+                <!-- ============================ WIDE PRODUCTS : END =========================== -->
 
 
-<!-- ============================================== Skip Brand 1 PRODUCTS ============================================== -->
+<!-- ============================= XIOMI BRAND PRODUCTS : START ========================= -->
                 <section class="section featured-product wow fadeInUp">
                     <h3 class="section-title"> @if(session()->get('language') == 'bangla') {{ $skip_brand_1->brand_name_bn }} @else {{ $skip_brand_1->brand_name_en }}  @endif </h3>
                     <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
@@ -968,21 +978,25 @@
                                             <div class="action">
                                                 <ul class="list-unstyled">
                                                     <li class="add-cart-button btn-group">
-                                                        <button data-toggle="tooltip"
+                                                        <button
                                                             class="btn btn-primary icon" type="button"
-                                                            title="Add Cart"> <i
+                                                            title="Add Cart"  data-toggle="modal" data-target="#exampleModal"  id="{{ $product->id }}" onclick="productView(this.id)"> <i
                                                                 class="fa fa-shopping-cart"></i> </button>
                                                         <button class="btn btn-primary cart-btn"
                                                             type="button">Add to cart</button>
                                                     </li>
-                                                    <li class="lnk wishlist"> <a data-toggle="tooltip"
-                                                            class="add-to-cart" href="detail.html"
-                                                            title="Wishlist"> <i class="icon fa fa-heart"></i>
-                                                        </a> </li>
-                                                    <li class="lnk"> <a data-toggle="tooltip"
-                                                            class="add-to-cart" href="detail.html"
-                                                            title="Compare"> <i class="fa fa-signal"
-                                                                aria-hidden="true"></i> </a> </li>
+
+                                                        <button class="btn btn-primary icon" type="button" title="Wishlist"  id="{{ $product->id }}" onclick="addToWishList(this.id)"> 
+                                                            <i class="icon fa fa-heart"></i> 
+                                                        </button> 
+                                                    
+                                                    <li class="lnk"> 
+                                                        <a data-toggle="tooltip" class="add-to-cart" href="#" title="Compare"> 
+                                                            <i class="fa fa-signal" aria-hidden="true"></i> 
+                                                        </a> 
+                                                    </li>
+
+
                                                 </ul>
                                             </div>
                                             <!-- /.action -->
@@ -1000,10 +1014,10 @@
                     <!-- /.home-owl-carousel -->
                 </section>
                 <!-- /.section -->
-                <!-- ============================================== Skip Brand 1 PRODUCTS : END ============================================== -->
+                <!-- ============================== Skip Brand 1 PRODUCTS : END ========================= -->
 
 
-                <!-- ============================================== BEST SELLER ============================================== -->
+                <!-- ======================== BEST SELLER ================================ -->
 
                 <div class="best-deal wow fadeInUp outer-bottom-xs">
                     <h3 class="section-title">Best seller</h3>
