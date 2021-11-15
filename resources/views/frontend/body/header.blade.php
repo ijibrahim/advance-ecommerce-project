@@ -242,6 +242,7 @@
                 @endforeach
 
                 <li class="dropdown  navbar-right special-menu"> <a href="#">@if(session()->get('language') == 'bangla') আজকের অফার @else Todays offer  @endif </a> </li>
+                <li class="dropdown  navbar-right special-menu"> <a href="{{ route('home.blog') }}">@if(session()->get('language') == 'bangla') ব্লক @else Blog  @endif </a> </li>
               </ul>
               <!-- /.navbar-nav -->
               <div class="clearfix"></div>

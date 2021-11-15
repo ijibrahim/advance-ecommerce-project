@@ -11,13 +11,13 @@
         <div class="box">
             <div class="box-header with-border">
                 <h4 class="box-title">Add Blog Post </h4>
-
+                <a href="{{ route('list.post') }}" class="btn btn-success" style="float: right;">List Post</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
                 <div class="row">
                     <div class="col">
-                        <form method="post" action="{{ route('product-store') }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('post-store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-12">

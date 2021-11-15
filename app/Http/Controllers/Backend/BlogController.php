@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Blog\BlogPostCategory;
 use App\Models\Blog\BlogPost;
 use Carbon\Carbon;
+use Image;
 
 class BlogController extends Controller
 {
@@ -96,13 +97,65 @@ class BlogController extends Controller
 
 
 // ============== Blog Post All Method ==============
-    public function ViewBlogPost(){
+
+    public function ListBlogPost(){
+        $blogpost = BlogPost::with('category')->latest()->get();
+        return view('backend.blog.post.post_list', compact('blogpost'));
+
+
+    }
+
+    public function AddBlogPost(){
 
         $blogcategory = BlogPostCategory::latest()->get();
         $blogpost = BlogPost::latest()->get();
-        return view('backend.blog.post.post_view', compact('blogpost','blogcategory'));
+        return view('backend.blog.post.post_add', compact('blogpost','blogcategory'));
     }
 
+
+    public function BlogPostStore(Request $request){
+
+        $request->validate([
+            'post_title_en' => 'required',
+            'post_title_bn' => 'required',
+            'post_details_en' => 'required',
+            'post_details_bn' => 'required',
+            'post_image' => 'required',
+        ],
+        [
+            'post_title_en.required' => 'Input Post Title English Name',
+            'post_title_bn.required' => 'Input Post Title Bangla Name',
+
+        ]
+
+    );
+
+        $image = $request->file('post_image');
+        $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+        image::make($image)->resize(780,433)->save('upload/post/'.$name_gen);
+        $save_url = 'upload/post/'.$name_gen;
+
+        BlogPost::insert([
+            'category_id' => $request->category_id,
+            'post_title_en' => $request->post_title_en,
+            'post_title_bn' => $request->post_title_bn,
+            'post_details_en' => $request->post_details_en,
+            'post_details_bn' => $request->post_details_bn,
+            'post_slug_en' => strtolower(str_replace(' ', '-',$request->post_title_en)),
+            'post_slug_bn' => str_replace(' ', '-',$request->post_title_bn),
+            'post_image' => $save_url,
+            'created_at' => Carbon::now(),
+
+        ]);
+
+         $notification = array(
+            'message' => 'Blog Post Inserted Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('list.post')->with($notification);
+
+    }
 
 
 }

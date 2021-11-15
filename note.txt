@@ -8,31 +8,6 @@ https://dashboard.stripe.com/apikeys === test api key
 composer require stripe/stripe-php === must run when same project run another pc
 composer require barryvdh/laravel-dompdf === commend for pdf link https://github.com/barryvdh/laravel-dompdf
 
-        app/Http/Controllers/User/AllUserController.php
-        app/Http/Controllers/User/CashController.php
-        app/Mail/
-        public/frontend/assets/images/payments/6.png
-        public/frontend/assets/images/payments/cash.png
-        resources/views/frontend/common/user_sidebar.blade.php
-        resources/views/frontend/payment/cash.blade.php
-        resources/views/frontend/user/
-        resources/views/mail/
+need blog post edit delete
 
-        modified:   app/Http/Controllers/Frontend/CartController.php
-        modified:   app/Http/Controllers/User/CheckoutController.php
-        modified:   app/Http/Controllers/User/StripeController.php
-        modified:   app/Models/OrderItem.php
-        modified:   app/Models/order.php
-        modified:   composer.json
-        modified:   composer.lock
-        modified:   config/app.php
-        modified:   database/migrations/2021_11_03_051313_create_orders_table.php
-        modified:   database/migrations/2021_11_03_051440_create_order_items_table.php
-        modified:   note.txt
-        modified:   resources/views/dashboard.blade.php
-        modified:   resources/views/frontend/checkout/checkout_view.blade.php
-        modified:   resources/views/frontend/main_master.blade.php
-        modified:   resources/views/frontend/payment/stripe.blade.php
-        modified:   resources/views/frontend/profile/change_password.blade.php
-        modified:   resources/views/frontend/profile/user_profile.blade.php
-        modified:   routes/web.php
+      
