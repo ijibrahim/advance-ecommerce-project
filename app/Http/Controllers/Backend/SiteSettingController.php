@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SiteSetting;
+use App\Models\Seo;
 use Image;
 use Carbon\Carbon;
 
@@ -76,5 +77,10 @@ class SiteSettingController extends Controller
             return redirect()->back()->with($notification);
         }
 
+    } // end method
+
+    public function SeoSetting(){
+        $seo = Seo::find(1);
+        return view('backend.setting.seo_update', compact('seo'));
     }
 }

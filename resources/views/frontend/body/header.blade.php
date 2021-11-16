@@ -60,8 +60,12 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-3 logo-holder"> 
-          <!-- ============================================================= LOGO ============================================================= -->
-          <div class="logo"> <a href="{{ url('/') }}"> <img src="{{ asset('frontend/assets/images/devs-stream-logo-white.png') }}" height="60" alt="logo"> </a> </div>
+
+          @php
+            $setting = App\Models\SiteSetting::find(1);
+          @endphp
+          <!-- ============================== LOGO ====================== -->
+          <div class="logo"> <a href="{{ url('/') }}"> <img src="{{ $setting->logo }}" alt="logo"> </a> </div>
           <!-- /.logo --> 
           <!-- ============================================================= LOGO : END ============================================================= --> </div>
         <!-- /.logo-holder -->
