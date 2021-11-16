@@ -32,10 +32,10 @@
                                     <label> Invoice</label>
                                 </td>
                                 <td class="col-md-2">
-                                    <label> Order</label>
+                                    <label> Return Reason</label>
                                 </td>
-                                <td class="col-md-1">
-                                    <label> Action</label>
+                                <td class="col-md-2">
+                                    <label> Order Status</label>
                                 </td>
                             </tr>
                         
@@ -56,16 +56,22 @@
                                 <label> {{$order->invoice_no}}</label>
                             </td>
                             <td class="col-md-2">
+                                <label> {{$order->return_reason}}</label>
+                            </td>
+                            <td class="col-md-2">
 
                                 <label> 
-                                    <span class="badge badge-pill badge-worning" style="background: #418DB9;">{{$order->status}}</span> 
+                                    @if($order->return_order == 0)
+                                    <span class="badge badge-pill badge-worning" style="background: #FF0000;">No Return Request</span> 
+                                    @elseif($order->return_order == 1)
+                                    <span class="badge badge-pill badge-worning" style="background: #800000;">Pending</span> 
                                     <span class="badge badge-pill badge-worning" style="background: red;"> Return Requested </span> 
+                                    @elseif($order->return_order == 2)
+                                    <span class="badge badge-pill badge-worning" style="background: #00FF00;">Success</span> 
+                                    @endif
                                 </label>
                             </td>
-                            <td class="col-md-1">
-                                <a href="{{ url('user/order_details/'.$order->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> View</a>
-                                <a target="_blank" href="{{ url('user/invoice_download/'.$order->id) }}" class="btn btn-sm btn-danger" style="margin-top: 5px"><i class="fa fa-download"></i> Invoice</a>
-                            </td>
+                            
                         </tr>
                         @endforeach
                         </tbody>

@@ -56,8 +56,27 @@
                                 <label> {{$order->invoice_no}}</label>
                             </td>
                             <td class="col-md-2">
+                                <label> 
+                                    @if($order->status == 'Panding')
+                                    <span class="badge badge-pill badge-worning" style="background: #808080;">Pending</span> 
+                                    @elseif($order->status == 'Confirm')
+                                    <span class="badge badge-pill badge-worning" style="background: #0000FF;">Confirm</span>  
+                                    @elseif($order->status == 'Processing')
+                                    <span class="badge badge-pill badge-worning" style="background: #FFA500;">Processing</span>  
+                                    @elseif($order->status == 'Picked')
+                                    <span class="badge badge-pill badge-worning" style="background: #808000;">Picked</span>  
+                                    @elseif($order->status == 'Shipped')
+                                    <span class="badge badge-pill badge-worning" style="background: #008000;">Shipped</span> 
+                                    @elseif($order->status == 'Delivered')
+                                    <span class="badge badge-pill badge-worning" style="background: #418DB9;">Delivered</span> 
+                                        @if($order->return_order == 1)
+                                        <span class="badge badge-pill badge-worning" style="background: red;"> Return Requested </span> 
+                                        @endif
 
-                                <label> <span class="badge badge-pill badge-worning" style="background: #418DB9;">{{$order->status}}</span> </label>
+                                    @else
+                                    <span class="badge badge-pill badge-worning" style="background: #FF0000;">Cancel</span> 
+                                    @endif  
+                                </label>
                             </td>
                             <td class="col-md-1">
                                 <a href="{{ url('user/order_details/'.$order->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> View</a>

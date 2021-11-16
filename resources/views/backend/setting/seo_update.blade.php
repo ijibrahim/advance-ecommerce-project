@@ -15,13 +15,13 @@
 			<div class="box-body">
 				<div class="row">
 					<div class="col">
-						<form method="POST" action="{{ route('update.sitesetting') }}" >
+						<form method="POST" action="{{ route('update.seosetting') }}" >
 							@csrf
 
 							<input type="hidden" name="id" value="{{ $seo->id }}">
 
 							<div class="row">
-								<div class="col-12">						
+								<div class="col-md-12">						
 									<div class="row">
 										<div class="col-md-6">
 
@@ -49,8 +49,8 @@
 											<div class="form-group">
 												<h5>Meta Description</h5>
                                                 <div class="controls">
-                                                    <textarea name="meta_description" id="textarea" class="form-control"
-                                                        required placeholder="Textarea text">{{ $seo->meta_description }}</textarea>
+                                                    <textarea name="meta_description" class="form-control"
+                                                        placeholder="Textarea text">{{ $seo->meta_description }}</textarea>
                                                 </div>
                                             </div>
 													
@@ -58,8 +58,8 @@
 											<div class="form-group">
 												<h5>Google Analytics</h5>
 												<div class="controls">
-													<textarea name="google_analytics" id="textarea" class="form-control"
-                                                        required placeholder="Textarea text">{{ $seo->google_analytics }}</textarea>
+													<textarea name="google_analytics" class="form-control"
+                                                        placeholder="Textarea text">{{ $seo->google_analytics }}</textarea>
 												</div>
 											</div>			
 									
