@@ -29,97 +29,86 @@
                         <h1>@if(session()->get('language')=='bangla'){{$blogpost->post_title_bn}}@else{{$blogpost->post_title_en}}@endif
                         </h1>
                         <span class="date-time">{{ Carbon\Carbon::parse($blogpost->created_at)->diffForHumans() }}</span>
+
+                        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                            <div class="addthis_inline_share_toolbox_lsuj"></div>
+
                         <p>@if(session()->get('language')=='bangla'){!! $blogpost->post_details_bn !!}@else{!!
                             $blogpost->post_details_en !!}@endif</p>
-                        <div class="social-media">
+                        
                             <span>share post:</span>
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                            <a href=""><i class="fa fa-rss"></i></a>
-                            <a href="" class="hidden-xs"><i class="fa fa-pinterest"></i></a>
-                        </div>
+                            
+                            <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                            <div class="addthis_inline_share_toolbox_lsuj"></div>
+                        
+                        
                     </div>
                     <div class="blog-post-author-details wow fadeInUp">
+@php
+    $comments = App\Models\Blog\BlogComment::where('blogpost_id',$blogpost->id)->orderBy('id','DESC')->limit(6)->get();
+@endphp 
+                        @foreach($comments as $item)
+                        
                         <div class="row">
                             <div class="col-md-2">
-                                <img src="assets/images/testimonials/member3.png" alt="Responsive image"
-                                    class="img-circle img-responsive">
+                                <img src="{{ (!empty($item->user->profile_photo_path))? url('upload/user_images/'.$item->user->profile_photo_path):url('upload/no_image.jpg') }}" width="40" height="40" style="border-radius: 50%;" alt="{{ $item->user->name }}" title="{{ $item->user->name }}" class="img-circle img-responsive">
                             </div>
                             <div class="col-md-10">
-                                <h4>John Doe</h4>
-                                <div class="btn-group author-social-network pull-right">
-                                    <span>Follow me on</span>
-                                    <button type="button" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="twitter-icon fa fa-twitter"></i>
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#"><i class="icon fa fa-facebook"></i>Facebook</a></li>
-                                        <li><a href="#"><i class="icon fa fa-linkedin"></i>Linkedin</a></li>
-                                        <li><a href=""><i class="icon fa fa-pinterest"></i>Pinterst</a></li>
-                                        <li><a href=""><i class="icon fa fa-rss"></i>RSS</a></li>
-                                    </ul>
-                                </div>
-                                <span class="author-job">Web Designer</span>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                                <h4>{{ $item->user->name }}</h4>
+                                
+                                <span class="author-job">{{ $item->title }}</span>
+                                <p>{{ $item->comment }}</p>
                             </div>
                         </div>
-                    </div>
+                        <hr>
+                        @endforeach
+
+                    </div> 
                     
 
 
 
 
                     <div class="blog-write-comment outer-bottom-xs outer-top-xs">
+
+                        
+
                         <div class="row">
+                        @guest
                             <div class="col-md-12">
                                 <h4>Leave A Comment</h4>
+                                <p><b>For Comment Blog You Need to Login First <a href="{{ route('login') }}">Login Here</a></b></p>
                             </div>
-                            <div class="col-md-4">
-                                <form class="register-form" role="form">
+                            
+
+                        @else
+                            <form class="register-form" role="form" method="POST" action="{{ route('comment.store') }}">
+                                @csrf
+                                <input type="hidden" name="blogpost_id" value="{{ $blogpost->id }}">
+
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="info-title" for="exampleInputName">Your Name
+                                        <label class="info-title" for="title">Title <span>*</span></label>
+                                        <input type="text" name="title" class="form-control unicase-form-control text-input"
+                                            id="title" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="info-title" for="comment">Your Comments
                                             <span>*</span></label>
-                                        <input type="email" class="form-control unicase-form-control text-input"
-                                            id="exampleInputName" placeholder="">
+                                        <textarea name="comment" class="form-control unicase-form-control"
+                                            id="comment"></textarea>
                                     </div>
-                                </form>
-                            </div>
-                            <div class="col-md-4">
-                                <form class="register-form" role="form">
-                                    <div class="form-group">
-                                        <label class="info-title" for="exampleInputEmail1">Email Address
-                                            <span>*</span></label>
-                                        <input type="email" class="form-control unicase-form-control text-input"
-                                            id="exampleInputEmail1" placeholder="">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="col-md-4">
-                                <form class="register-form" role="form">
-                                    <div class="form-group">
-                                        <label class="info-title" for="exampleInputTitle">Title <span>*</span></label>
-                                        <input type="email" class="form-control unicase-form-control text-input"
-                                            id="exampleInputTitle" placeholder="">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="col-md-12">
-                                <form class="register-form" role="form">
-                                    <div class="form-group">
-                                        <label class="info-title" for="exampleInputComments">Your Comments
-                                            <span>*</span></label>
-                                        <textarea class="form-control unicase-form-control"
-                                            id="exampleInputComments"></textarea>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="col-md-12 outer-bottom-small m-t-20">
-                                <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Submit
-                                    Comment</button>
-                            </div>
+                                </div>
+                                <div class="col-md-12 outer-bottom-small m-t-20">
+                                    <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Submit
+                                        Comment</button>
+                                </div>
+                            </form>
+                            
+                        @endguest
+
                         </div>
                     </div>
                 </div>

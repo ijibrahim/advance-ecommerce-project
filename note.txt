@@ -10,4 +10,6 @@ composer require barryvdh/laravel-dompdf === commend for pdf link https://github
 
 need blog post edit delete
 
+addthis.com for sosical media share product
+
       

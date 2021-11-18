@@ -169,6 +169,37 @@
 
           </ul>
         </li>       
+                                     
+        <li class="treeview {{ ($prefix == '/review')?'active':'' }}  ">
+          <a href="#">
+            <i data-feather="file"></i>
+            <span>Manage Review</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+
+            <li class="{{ ($route == 'pending.review')? 'active':'' }}"><a href="{{ route('pending.review') }}"><i class="ti-more"></i>Panding Review</a></li>
+            <li class="{{ ($route == 'publish.review')? 'active':'' }}"><a href="{{ route('publish.review') }}"><i class="ti-more"></i>Publish Review</a></li>
+
+          </ul>
+        </li>       
+                                          
+        <li class="treeview {{ ($prefix == '/comment')?'active':'' }}  ">
+          <a href="#">
+            <i data-feather="file"></i>
+            <span>Manage Comment</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+
+            <li class="{{ ($route == 'all.comment')? 'active':'' }}"><a href="{{ route('all.comment') }}"><i class="ti-more"></i>All Comments</a></li>
+
+          </ul>
+        </li>       
      
         <li class="header nav-small-cap">User Interface</li>
                  
@@ -193,6 +224,20 @@
           </ul>
         </li> 
 		                 
+        <li class="treeview {{ ($prefix == '/stock')?'active':'' }}  ">
+          <a href="#">
+            <i data-feather="file"></i>
+            <span>Manage Stock</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="{{ ($route == 'product.stock')? 'active':'' }}"><a href="{{ route('product.stock') }}"><i class="ti-more"></i>Product Stock</a></li> 
+          </ul>
+        </li> 
+    
+                               
         <li class="treeview {{ ($prefix == '/reports')?'active':'' }}  ">
           <a href="#">
             <i data-feather="file"></i>

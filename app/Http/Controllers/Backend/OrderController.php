@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 use Auth;
 use Carbon\Carbon;
 use PDF;
+use DB;
 
 
 class OrderController extends Controller
@@ -146,6 +148,14 @@ class OrderController extends Controller
 
 
     public function ShippedDelivered($order_id){
+
+        $product = OrderItem::where('order_id',$order_id)->get();
+
+        foreach($product as $item){
+            Product::where('id',$item->product_id)->update([
+                'product_qty' => DB::raw('product_qty - '.$item->qty)
+            ]);
+        }
 
         $order = Order::findOrFail($order_id)->update([
 

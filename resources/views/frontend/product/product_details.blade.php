@@ -301,9 +301,8 @@
                                 </div><!-- /.quantity-container -->
 
 
-
-
-
+                                <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                                <div class="addthis_inline_share_toolbox_lsuj"></div>
 
                             </div><!-- /.product-info -->
                         </div><!-- /.col-sm-7 -->
@@ -337,16 +336,34 @@
 
                                         <div class="product-reviews">
                                             <h4 class="title">Customer Reviews</h4>
-
+@php
+    $reviews = App\Models\Review::where('product_id',$product->id)->latest()->limit(5)->get()
+@endphp
                                             <div class="reviews">
+
+
+                                                @foreach($reviews as $item)
+                                                @if($item->status == 0)
+
+                                                @else
+                                                
                                                 <div class="review">
-                                                    <div class="review-title"><span class="summary">We love this
-                                                            product</span><span class="date"><i
-                                                                class="fa fa-calendar"></i><span>1 days
-                                                                ago</span></span></div>
-                                                    <div class="text">"Lorem ipsum dolor sit amet, consectetur
-                                                        adipiscing elit.Aliquam suscipit."</div>
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                            <img src="{{ (!empty($item->user->profile_photo_path))? url('upload/user_images/'.$item->user->profile_photo_path):url('upload/no_image.jpg') }}" width="40" height="40" style="border-radius: 50%;" alt="{{ $item->user->name }}" title="{{ $item->user->name }}"> 
+                                                        </div>
+                                                        <div class="col-md-11">
+                                                            <b> {{ $item->user->name }}</b>
+                                                        </div>
+
+                                                    </div> {{-- // end row --}}
+                                                    <div class="review-title"><span class="summary">{{ $item->summary }}</span><span class="date"><i
+                                                                class="fa fa-calendar"></i><span>{{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}</span></span></div>
+                                                    <div class="text">"{{ $item->comment }}"</div>
                                                 </div>
+
+                                                @endif
+                                                @endforeach
 
                                             </div><!-- /.reviews -->
                                         </div><!-- /.product-reviews -->
@@ -369,32 +386,33 @@
                                                 @else
 
                                                 <div class="form-container">
-                                                    <form role="form" class="cnt-form">
-
+                                                    <form role="form" class="cnt-form" method="POST" action="{{ route('review.store') }}">
+                                                        @csrf
+                                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 
                                                                 <div class="form-group">
-                                                                    <label for="exampleInputSummary">Summary <span
+                                                                    <label for="summary">Summary <span
                                                                             class="astk">*</span></label>
-                                                                    <input type="text" class="form-control txt"
-                                                                        id="exampleInputSummary" placeholder="">
+                                                                    <input type="text" name="summary" class="form-control txt"
+                                                                        id="summary" placeholder="">
                                                                 </div><!-- /.form-group -->
                                                             </div>
 
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label for="exampleInputReview">Review <span
+                                                                    <label for="comment">Review <span
                                                                             class="astk">*</span></label>
-                                                                    <textarea class="form-control txt txt-review"
-                                                                        id="exampleInputReview" rows="4"
+                                                                    <textarea name="comment" class="form-control txt txt-review"
+                                                                        id="comment" rows="4"
                                                                         placeholder=""></textarea>
                                                                 </div><!-- /.form-group -->
                                                             </div>
                                                         </div><!-- /.row -->
 
                                                         <div class="action text-right">
-                                                            <button class="btn btn-primary btn-upper">SUBMIT
+                                                            <button type="submit" class="btn btn-primary btn-upper">SUBMIT
                                                                 REVIEW</button>
                                                         </div><!-- /.action -->
 
@@ -552,5 +570,6 @@
             <div class="clearfix"></div>
         </div><!-- /.row -->
     </div>
+
 
     @endsection

@@ -299,5 +299,13 @@ class ProductController extends Controller
         $multiimgs = MultiImg::where('product_id', $id)->get();
         $products = Product::findOrFail($id);
         return view('backend.product.product_details', compact('products','multiimgs'));
+    } // end method
+
+
+// ================= Product Stock ====================== 
+
+    public function ProductStock(){
+        $products = Product::latest()->get();
+        return view('backend.product.product_stock', compact('products'));
     }
 }

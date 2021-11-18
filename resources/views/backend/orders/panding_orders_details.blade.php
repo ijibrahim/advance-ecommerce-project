@@ -107,7 +107,7 @@
                                 <th>Order: </th>
                                 <td>
                                     <label> 
-                                        <span class="badge badge-pill badge-worning" style="background: #418DB9; color: #FFFFFF">{{$order->status}}</span> 
+                                        <span class="badge badge-success-light badge-lg">{{$order->status}}</span> 
                                     </label>
                                 </td> 
                                 
@@ -118,27 +118,27 @@
                                 <td>
                                     @if($order->status == 'Panding')
 
-                                    <a href="{{ route('panding-confirm',$order->id) }}" class="btn btn-block btn-success" id="confirm">Confirm Order</a>
+                                    <a href="{{ route('panding-confirm',$order->id) }}" class="waves-effect waves-light btn btn-success mx-5" id="confirm">Confirm Order</a>
 
                                     @elseif($order->status == 'Confirm')
 
-                                     <a href="{{ route('confirm-processing',$order->id) }}" class="btn btn-block btn-success" id="processing">Processing Order</a>
+                                     <a href="{{ route('confirm-processing',$order->id) }}" class="waves-effect waves-light btn btn-warning mx-5" id="processing">Processing Order</a>
 
                                     @elseif($order->status == 'Processing')
 
-                                     <a href="{{ route('processing-picked',$order->id) }}" class="btn btn-block btn-success" id="picked">Picked Order</a>
+                                     <a href="{{ route('processing-picked',$order->id) }}" class="waves-effect waves-light btn btn-warning mx-5" id="picked">Picked Order</a>
 
                                     @elseif($order->status == 'Picked')
 
-                                     <a href="{{ route('picked-shipped',$order->id) }}" class="btn btn-block btn-success" id="shipped">Shipped Order</a>
+                                     <a href="{{ route('picked-shipped',$order->id) }}" class="waves-effect waves-light btn btn-warning mx-5" id="shipped">Shipped Order</a>
 
                                     @elseif($order->status == 'Shipped')
 
-                                     <a href="{{ route('shipped-delivered',$order->id) }}" class="btn btn-block btn-success" id="delivered">Delivered Order</a>
+                                     <a href="{{ route('shipped-delivered',$order->id) }}" class="waves-effect waves-light btn btn-success mx-5" id="delivered">Delivered Order</a>
 
                                     @elseif($order->status == 'Delivered')
 
-                                     <a href="{{ route('delivered-cancel',$order->id) }}" class="btn btn-block btn-success" id="cancel">Cancel Order</a>
+                                     <a href="{{ route('delivered-cancel',$order->id) }}" class="waves-effect waves-light btn btn-danger mx-5" id="cancel">Cancel Order</a>
 
                                     @endif
                                 </td>
