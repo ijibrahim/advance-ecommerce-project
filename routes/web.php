@@ -17,6 +17,7 @@ use App\Http\Controllers\Backend\ReportController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\SiteSettingController;
 use App\Http\Controllers\Backend\ReturnController;
+use App\Http\Controllers\Backend\AdminUserController;
 
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
@@ -413,3 +414,24 @@ Route::prefix('shipping')->group(function(){
  
     Route::get('/product', [ProductController::class, 'ProductStock'])->name('product.stock'); 
 });
+
+
+// Admin Manage User Role Routes
+
+    Route::prefix('adminuserrole')->group(function(){
+ 
+    Route::get('/all', [AdminUserController::class, 'AllAdminRole'])->name('all.admin.user'); 
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
