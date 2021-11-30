@@ -130,6 +130,9 @@
                                     <td class="col-md-3">
                                         <label> Price</label>
                                     </td>
+                                    <td class="col-md-3">
+                                        <label> Download</label>
+                                    </td>
                                 </tr>
                             
                             
@@ -157,6 +160,16 @@
                                 <td class="col-md-3">
                                     <label> ${{$item->price}} Total ($ {{$item->price * $item->qty}}) </label>
                                 </td>
+
+
+                                @php
+                                    $file = App\Models\Product::where('id',$item->product_id)->first();
+                                @endphp
+                                <td class="col-md-1">
+                                    @if($order->status == 'Pending')
+                                    <label> {{$item->qty}}</label>
+                                </td>
+
                             </tr>
                             @endforeach
                             </tbody>
