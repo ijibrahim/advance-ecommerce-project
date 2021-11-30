@@ -430,9 +430,11 @@ Route::prefix('shipping')->group(function(){
     Route::get('/delete/{id}', [AdminUserController::class, 'DeleteAdminRole'])->name('delete.admin.user'); 
 });
 
-    // Product Search Here
 
-    Route::post('/search', [IndexController::class, 'ProductSearch'])->name('product.search'); 
+    /// Product Search Route 
+    Route::post('/search', [IndexController::class, 'ProductSearch'])->name('product.search');
+    // Advance Search Route
+    Route::post('/search-product', [IndexController::class, 'SearchProduct']); 
 
 
 
