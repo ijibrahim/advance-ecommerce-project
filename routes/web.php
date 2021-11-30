@@ -204,7 +204,7 @@ Route::prefix('slider')->group(function(){
     Route::post('/add-to-wishlist/{product_id}', [CartController::class, 'AddToWishList']);
 
 
-    // User Middleware
+    // User Middleware -- user mast login
 Route::group(['prefix' => 'user', 'middleware' => ['user','auth'], 'namespace' => 'User' ], function(){
     // Get Wishlist Page
     Route::get('/wishlist/', [WishlistController::class, 'ViewWishlist'])->name('wishlist');    
@@ -221,6 +221,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['user','auth'], 'namespace' =
     Route::post('/return/order/{order_id}', [AllUserController::class, 'ReturnOrder'])->name('return.order');
     Route::get('/return/order/list/', [AllUserController::class, 'ReturnOrderList'])->name('return.order.list');
     Route::get('/cancel/orders', [AllUserController::class, 'CancelOrder'])->name('cancel.orders');
+
+    Route::post('/order/tracking', [AllUserController::class, 'OrderTracking'])->name('order.tracking');
     
 
     });
@@ -427,6 +429,12 @@ Route::prefix('shipping')->group(function(){
     Route::post('/update', [AdminUserController::class, 'UpdateAdminRole'])->name('admin.user.update'); 
     Route::get('/delete/{id}', [AdminUserController::class, 'DeleteAdminRole'])->name('delete.admin.user'); 
 });
+
+    // Product Search Here
+
+    Route::post('/search', [IndexController::class, 'ProductSearch'])->name('product.search'); 
+
+
 
 
 

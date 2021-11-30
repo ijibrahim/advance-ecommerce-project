@@ -11,12 +11,19 @@
              @if(session()->get('language') == 'bangla') আমার একাউন্ট @else  My Account  @endif 
           </a></li>
             <li><a href="{{ route('wishlist') }}"><i class="icon fa fa-heart"></i> @if(session()->get('language') == 'bangla') উইস লিস্ট @else  My Wishlist  @endif </a></li>
+
             <li><a href="{{ route('mycart') }}"><i class="icon fa fa-shopping-cart"></i>@if(session()->get('language') == 'bangla') আমার কার্ড @else My Cart @endif </a></li>
+
+            <li><a href="" data-toggle="modal" data-target="#orderTrackingModal"><i class="icon fa fa-check"></i>@if(session()->get('language') == 'bangla') অর্ডার ট্র্যাকিং @else Order Tracking @endif</a></li>
+
             <li><a href="{{ route('checkout') }}"><i class="icon fa fa-check"></i>@if(session()->get('language') == 'bangla') চেকআউট @else Checkout @endif</a></li>
+
             @auth
             <li><a href="{{ route('login') }}"><i class="icon fa fa-user"></i>@if(session()->get('language') == 'bangla')ইউজার একাউন্ট @else User Profile @endif </a></li>
+
             @else
             <li><a href="{{   ('login') }}"><i class="icon fa fa-lock"></i>@if(session()->get('language') == 'bangla') লগইন / রেজিস্ট্রেশন @else Login/Register @endif</a></li>
+
             @endauth
           </ul>
         </div>
@@ -74,7 +81,8 @@
           <!-- /.contact-row --> 
           <!-- ============================================================= SEARCH AREA ============================================================= -->
           <div class="search-area">
-            <form>
+            <form method="post" action="{{ route('product.search') }}">
+              @csrf
               <div class="control-group">
                 <ul class="categories-filter animate-dropdown">
                   <li class="dropdown"> <a class="dropdown-toggle"  data-toggle="dropdown" href="category.html"> @if(session()->get('language') == 'bangla') ক্যাটাগরীস @else Categories  @endif <b class="caret"></b></a>
@@ -91,8 +99,10 @@
                     </ul>
                   </li>
                 </ul>
-                <input class="search-field" placeholder="Search here..." />
-                <a class="search-button" href="#" ></a> </div>
+                <input class="search-field" name="search" placeholder="Search here..." />
+                <!-- <a class="search-button" href="" ></a> --> 
+                <button type="submit" class="search-button"></button>
+              </div>
             </form>
           </div>
           <!-- /.search-area --> 
@@ -264,6 +274,32 @@
     
   </div>
   <!-- /.header-nav --> 
-  <!-- ============================================== NAVBAR : END ============================================== --> 
+  <!-- =========================== NAVBAR : END ========================= --> 
+
+  <!-- Order Tracking Modal -->
+<div class="modal fade" id="orderTrackingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tracking Your Order</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="{{ route('order.tracking') }}">
+          @csrf
+          <div class="modal-body">
+            <label>Invoice Code</label>
+            <input type="text" name="code" required="" class="form-control" placeholder="Your Order Invoice Number">
+
+            <button class="btn btn-danger" type="submit" style="margin-top: 17px">Track Now</button>
+          </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
   
 </header>

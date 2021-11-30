@@ -171,5 +171,13 @@ class IndexController extends Controller
 
     } // end Method
 
+// ========================== Product Search ====================
+
+    public function ProductSearch(Request $request){
+
+        $item = $request->search;
+        // echo "$item";
+    }
+
     
 }
