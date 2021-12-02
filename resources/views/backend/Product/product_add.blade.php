@@ -393,15 +393,13 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                            <div class="form-group">
-                                                <h5>Digital Product <span class="text-danger">pdf, xlx, cvs</span></h5>
-                                                <div class="controls">
-                                                    <input type="file" name="file" class="form-control" >
-                                                </div>
+                                        <div class="form-group">
+                                            <h5>Digital Product <span class="text-danger">pdf, xlx, cvs</span></h5>
+                                            <div class="controls">
+                                                <input type="file" name="file" class="form-control" >
                                             </div>
-
-
-                                        </div> <!-- end col md 6 -->
+                                        </div>
+                                    </div> <!-- end col md 6 -->
 
                                     <div class="text-xs-right">
                                         <input type="submit" class="btn btn-rounded btn-primary mb-5"

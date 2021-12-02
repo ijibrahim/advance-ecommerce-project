@@ -167,7 +167,10 @@
                                 @endphp
                                 <td class="col-md-1">
                                     @if($order->status == 'Pending')
-                                    <label> {{$item->qty}}</label>
+                                        <strong><span class="badge badge-pill badge-success" style="background: #418DB9;">No File</span></strong>
+                                    @elseif($order->status == 'Confirm')
+                                        <a target="_blank" href="{{ asset('upload/pdf/'.$file->digital_file) }}"><strong><span class="badge badge-pill badge-success" style="background: #FF0000;">Download Ready</span></strong></a>
+                                    @endif
                                 </td>
 
                             </tr>
