@@ -7,7 +7,7 @@
 @endsection
 
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
 
@@ -325,7 +325,7 @@
             <div class="text-right">
               <div class="pagination-container">
                 <ul class="list-inline list-unstyled">
-                  {{ $products->links() }}
+                  
                 </ul>
                 <!-- /.list-inline --> 
               </div>
@@ -347,15 +347,15 @@
 
     </div>
     <!-- /.row --> 
+  </div>
     <!-- ============================================== BRANDS CAROUSEL ============================================== -->
 
     <!-- /.logo-slider --> 
     <!-- ============================================== BRANDS CAROUSEL : END ============================================== --> </div>
   <!-- /.container --> 
-  
 </div>
-<!-- /.body-content --> 
     @include('frontend.body.brands')
+<!-- /.body-content --> 
 
 
 </div>
@@ -373,7 +373,17 @@
       })
 
       .done(function(data){
-        if (true) {}
+        if (data.grid_view == " " || data.list_view == " ") {
+          return;
+        }
+        $('.ajax-loadmore-product').hide();
+
+        $('#grid_view_product').append('data.grid_view');
+        $('#list_view_product').append('data.list_view');
+      })
+
+      .fail(function(){
+        alert('Something want wrong');
       })
 
     }

@@ -541,6 +541,7 @@
       <!-- /.col --> 
     </div>
     <!-- /.row --> 
+  </div>
     <!-- ============================================== BRANDS CAROUSEL ============================================== -->
 
     <!-- /.logo-slider --> 
@@ -548,8 +549,8 @@
   <!-- /.container --> 
   
 </div>
-<!-- /.body-content --> 
     @include('frontend.body.brands')
+<!-- /.body-content --> 
 
 
 </div>
